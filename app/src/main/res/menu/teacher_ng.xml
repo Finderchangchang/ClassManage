@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_ng"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="首页" />
+    <item
+        android:id="@+id/home_ng1"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="首页" />
+    <item
+        android:id="@+id/tm_ng"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="题目" />
+    <item
+        android:id="@+id/wt_ng"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="问题" />
+    <item
+        android:id="@+id/user_ng"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="个人中心" />
+
+</menu>
