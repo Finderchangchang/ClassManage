@@ -68,7 +68,10 @@ public class LoginActivity extends BaseActivity {
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(view -> attemptLogin());
         String name = Utils.getCache("user_name");
-        mEmailView.setText(Utils.getCache("user_name"));
+        if (!TextUtils.isEmpty(name)) {
+            mEmailView.setText(name);
+            mEmailView.setSelection(name.length());
+        }
     }
 
     @Override

@@ -23,6 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ClassTestActivity" />
+        <activity android:name=".TestDetailActivity"></activity>
     </application>
 
 </manifest>
