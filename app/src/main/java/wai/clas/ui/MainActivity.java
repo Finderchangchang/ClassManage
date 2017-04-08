@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity {
         }
         mainTv1.setOnClickListener(v -> new LoadingDialog(this).show());
         mainTv2.setOnClickListener(view -> Utils.IntentPost(ClassTestActivity.class));
+        mainTv4.setOnClickListener(v -> Utils.IntentPost(UserCenterActivity.class));
     }
 
     @Override

@@ -59,7 +59,10 @@
     </declare-styleable>
     <declare-styleable name="MenuView">
         <attr name="menu_left_iv" format="reference" /><!--左侧图-->
+        <attr name="menu_right_iv" format="reference" /><!--右侧箭头-->
         <attr name="menu_left_tv" format="string" /><!--左侧文字-->
         <attr name="menu_right_tv" format="string" /><!--右侧文字-->
+        <attr name="menu_left_tv_color" format="color" /><!--左侧文字颜色-->
+        <attr name="menu_right_tv_color" format="color" /><!--右侧文字颜色-->
     </declare-styleable>
 </resources>

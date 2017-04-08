@@ -8,9 +8,10 @@
     <net.tsz.afinal.view.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        app:center_tv="个人中心" />
+        app:center_tv="个人中心"
+        app:no_bottom_line="true" />
 
     <LinearLayout
         android:id="@+id/user_center_ll"
@@ -30,19 +31,10 @@
     </LinearLayout>
 
     <net.tsz.afinal.view.MenuView
+        android:id="@+id/exit_mv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu_left_iv="@mipmap/ic_launcher" />
-
-    <net.tsz.afinal.view.MenuView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:menu_left_iv="@mipmap/ic_launcher" />
-
-    <net.tsz.afinal.view.MenuView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
         app:menu_left_iv="@mipmap/ic_launcher"
         app:menu_left_tv="退出登录"
-        app:menu_right_tv="双击666"/>
+        app:menu_right_tv="双击666" />
 </LinearLayout>
