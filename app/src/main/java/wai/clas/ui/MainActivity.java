@@ -1,6 +1,7 @@
 package wai.clas.ui;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,9 +39,10 @@ public class MainActivity extends BaseActivity {
             mainTv3.setText("提问管理");
             mainTv4.setText("个人中心");
         }
-        mainTv1.setOnClickListener(v -> new LoadingDialog(this).show());
-        mainTv2.setOnClickListener(view -> Utils.IntentPost(ClassTestActivity.class));
-        mainTv4.setOnClickListener(v -> Utils.IntentPost(UserCenterActivity.class));
+        mainTv1.setOnClickListener(v -> new LoadingDialog(this).show());//签到管理
+        mainTv2.setOnClickListener(view -> Utils.IntentPost(ClassTestActivity.class));//课程管理
+        mainTv3.setOnClickListener(view -> Utils.IntentPost(AskManageActivity.class));//提问管理
+        mainTv4.setOnClickListener(v -> Utils.IntentPost(UserCenterActivity.class));//个人中心
     }
 
     @Override

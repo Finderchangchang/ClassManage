@@ -38,6 +38,7 @@ public class ClassTestActivity extends BaseActivity {
     @Bind(R.id.upload_btn)
     Button uploadBtn;
     String user_type;
+
     @Override
     public void initViews() {
         user_type = Utils.getCache("user_type");

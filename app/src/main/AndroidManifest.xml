@@ -25,9 +25,9 @@
         </activity>
         <activity android:name=".ClassTestActivity" />
         <activity android:name=".TestDetailActivity" />
-        <activity android:name=".UserCenterActivity">
-
-        </activity>
+        <activity android:name=".UserCenterActivity" />
+        <activity android:name=".AskManageActivity" />
+        <activity android:name=".AskDetailActivity"></activity>
     </application>
 
 </manifest>
