@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ViewFlipper;
+
+import net.tsz.afinal.view.TitleBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,19 +32,19 @@ public class ClassTestActivity extends BaseActivity {
     List<ClassTest> classTests;
     CommonAdapter<ClassTest> commonAdapter;
     @Bind(R.id.toolbar)
-    Toolbar toolbar;
+    TitleBar toolbar;
     @Bind(R.id.main_lv)
     ListView mainLv;
     @Bind(R.id.upload_btn)
     Button uploadBtn;
     String user_type;
-
     @Override
     public void initViews() {
         user_type = Utils.getCache("user_type");
         if (("0").equals(user_type)) {
             uploadBtn.setVisibility(View.GONE);
         }
+        toolbar.setLeftClick(() -> finish());
         classTests = new ArrayList<>();
         commonAdapter = new CommonAdapter<ClassTest>(this, classTests, R.layout.item_test) {
             @Override

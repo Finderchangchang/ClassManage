@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.tsz.afinal.view.LoadingDialog;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import wai.clas.base.BaseActivity;
@@ -36,6 +38,7 @@ public class MainActivity extends BaseActivity {
             mainTv3.setText("提问管理");
             mainTv4.setText("个人中心");
         }
+        mainTv1.setOnClickListener(v -> new LoadingDialog(this).show());
         mainTv2.setOnClickListener(view -> Utils.IntentPost(ClassTestActivity.class));
     }
 
