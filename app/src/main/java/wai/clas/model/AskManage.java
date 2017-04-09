@@ -1,5 +1,7 @@
 package wai.clas.model;
 
+import java.io.Serializable;
+
 import cn.bmob.v3.BmobObject;
 
 /**
@@ -7,7 +9,7 @@ import cn.bmob.v3.BmobObject;
  * QQ群481606175
  */
 
-public class AskManage extends BmobObject {
+public class AskManage extends BmobObject implements Serializable {
     String title;
     String content;
     UserModel student;

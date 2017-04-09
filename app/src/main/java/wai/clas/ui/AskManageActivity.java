@@ -72,7 +72,7 @@ public class AskManageActivity extends BaseActivity {
         });
         main_lv.setOnItemClickListener((adapterView, view, i, l) ->
                 Utils.IntentPost(AskDetailActivity.class, intent ->
-                        intent.putExtra("id", list.get(i).getObjectId())));
+                        intent.putExtra("model", list.get(i))));
     }
 
     @Override

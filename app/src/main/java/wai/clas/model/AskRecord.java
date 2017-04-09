@@ -9,8 +9,16 @@ import cn.bmob.v3.BmobObject;
 
 public class AskRecord extends BmobObject {
     AskManage askid;
-    UserModel teacher;
-    UserModel student;
+    UserModel user;
+    String answer;
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 
     public AskManage getAskid() {
         return askid;
@@ -20,19 +28,11 @@ public class AskRecord extends BmobObject {
         this.askid = askid;
     }
 
-    public UserModel getTeacher() {
-        return teacher;
+    public UserModel getUser() {
+        return user;
     }
 
-    public void setTeacher(UserModel teacher) {
-        this.teacher = teacher;
-    }
-
-    public UserModel getStudent() {
-        return student;
-    }
-
-    public void setStudent(UserModel student) {
-        this.student = student;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 }
