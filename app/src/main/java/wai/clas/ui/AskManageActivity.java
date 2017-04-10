@@ -1,6 +1,8 @@
 package wai.clas.ui;
 
+import android.content.Intent;
 import android.text.TextUtils;
+import android.widget.Button;
 import android.widget.ListView;
 
 import net.tsz.afinal.view.TitleBar;
@@ -30,6 +32,8 @@ public class AskManageActivity extends BaseActivity {
     TitleBar toolbar;
     @Bind(R.id.main_lv)
     ListView main_lv;
+    @Bind(R.id.add_question_btn)
+    Button add_question_btn;
     List<AskManage> list;
     CommonAdapter<AskManage> commonAdapter;
 
@@ -57,6 +61,16 @@ public class AskManageActivity extends BaseActivity {
             }
         };
         main_lv.setAdapter(commonAdapter);
+        refresh();
+        main_lv.setOnItemClickListener((adapterView, view, i, l) ->
+                Utils.IntentPost(AskDetailActivity.class, intent ->
+                        intent.putExtra("model", list.get(i))));
+        add_question_btn.setOnClickListener(v ->
+                startActivityForResult(new Intent(AskManageActivity.this, AddAskActivity.class), 0));
+    }
+
+    void refresh() {
+        list = new ArrayList<>();
         BmobQuery<AskManage> query = new BmobQuery<>();
         UserModel userModel = new UserModel();
         userModel.setObjectId(Utils.getCache("user_id"));
@@ -70,9 +84,16 @@ public class AskManageActivity extends BaseActivity {
                 }
             }
         });
-        main_lv.setOnItemClickListener((adapterView, view, i, l) ->
-                Utils.IntentPost(AskDetailActivity.class, intent ->
-                        intent.putExtra("model", list.get(i))));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            case 99:
+                refresh();
+                break;
+        }
     }
 
     @Override

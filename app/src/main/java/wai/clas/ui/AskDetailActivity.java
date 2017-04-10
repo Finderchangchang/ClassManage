@@ -1,6 +1,9 @@
 package wai.clas.ui;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,11 +17,14 @@ import butterknife.ButterKnife;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 import wai.clas.base.BaseActivity;
 import wai.clas.method.CommonAdapter;
 import wai.clas.method.CommonViewHolder;
+import wai.clas.method.Utils;
 import wai.clas.model.AskManage;
 import wai.clas.model.AskRecord;
+import wai.clas.model.UserModel;
 
 /**
  * 提问详情
@@ -37,6 +43,10 @@ public class AskDetailActivity extends BaseActivity {
     ListView mainLv;
     @Bind(R.id.toolbar)
     TitleBar toolbar;
+    @Bind(R.id.send_msg_et)
+    EditText send_msg_et;
+    @Bind(R.id.send_btn)
+    Button send_btn;
 
     @Override
     public void initViews() {
@@ -56,6 +66,11 @@ public class AskDetailActivity extends BaseActivity {
                 holder.setText(R.id.title_tv, askRecord.getUser().getUsername());
                 holder.setText(R.id.content_tv, askRecord.getAnswer());
                 holder.setText(R.id.time_tv, askRecord.getCreatedAt());
+                if (("0").equals(askRecord.getUser().getUsertype())) {
+                    holder.setText(R.id.user_type_tv, "学生");
+                } else {
+                    holder.setText(R.id.user_type_tv, "教师");
+                }
             }
         };
         mainLv.setAdapter(commonAdapter);
@@ -72,6 +87,28 @@ public class AskDetailActivity extends BaseActivity {
                     commonAdapter.refresh(records);
                 }
             }
+        });
+        send_btn.setOnClickListener(v -> {
+            AskRecord record = new AskRecord();
+            UserModel model = new UserModel();
+            model.setObjectId(Utils.getCache("user_id"));
+            model.setUsername(Utils.getCache("user_name"));
+            model.setUsername(Utils.getCache("user_type"));
+            record.setAskid(manage);
+            record.setUser(model);
+            record.setAnswer(send_msg_et.getText().toString().trim());
+            record.save(new SaveListener<String>() {
+                @Override
+                public void done(String s, BmobException e) {
+                    if (e == null) {
+                        records.add(record);
+                        commonAdapter.refresh(records);
+                        send_msg_et.setText("");
+                    } else {
+                        ToastShort("发送失败，请检查网络连接");
+                    }
+                }
+            });
         });
     }
 
