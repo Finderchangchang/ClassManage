@@ -28,7 +28,11 @@
         <activity android:name=".UserCenterActivity" />
         <activity android:name=".AskManageActivity" />
         <activity android:name=".AskDetailActivity" />
-        <activity android:name=".AddAskActivity"></activity>
+        <activity android:name=".AddAskActivity" />
+        <activity
+            android:name=".AddClassActivity"
+            android:label="@string/title_activity_add_class"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

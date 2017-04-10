@@ -2,6 +2,7 @@ package wai.clas.ui;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -36,6 +37,7 @@ public class AskManageActivity extends BaseActivity {
     Button add_question_btn;
     List<AskManage> list;
     CommonAdapter<AskManage> commonAdapter;
+    String type;
 
     @Override
     public void initViews() {
@@ -45,6 +47,10 @@ public class AskManageActivity extends BaseActivity {
     @Override
     public void initEvents() {
         list = new ArrayList<>();
+        type = Utils.getCache("user_type");
+        if (("1").equals(type)) {
+            add_question_btn.setVisibility(View.GONE);
+        }
         commonAdapter = new CommonAdapter<AskManage>(this, list, R.layout.item_ask) {
             @Override
             public void convert(CommonViewHolder holder, AskManage askManage, int position) {

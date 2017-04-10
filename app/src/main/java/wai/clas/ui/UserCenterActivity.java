@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 import wai.clas.base.BaseActivity;
+import wai.clas.method.Utils;
 import wai.clas.model.UserModel;
 
 public class UserCenterActivity extends BaseActivity {
@@ -40,6 +41,7 @@ public class UserCenterActivity extends BaseActivity {
             builder.setMessage("确定要退出当前账号吗?");
             builder.setNegativeButton("确定", (dialog, which) -> {
                 UserModel.logOut();
+                Utils.putCache("user_name", "");
             });
             builder.setPositiveButton("取消", (dialog2, which) -> {
 

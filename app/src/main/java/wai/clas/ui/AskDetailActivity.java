@@ -93,7 +93,7 @@ public class AskDetailActivity extends BaseActivity {
             UserModel model = new UserModel();
             model.setObjectId(Utils.getCache("user_id"));
             model.setUsername(Utils.getCache("user_name"));
-            model.setUsername(Utils.getCache("user_type"));
+            model.setUsertype(Utils.getCache("user_type"));
             record.setAskid(manage);
             record.setUser(model);
             record.setAnswer(send_msg_et.getText().toString().trim());

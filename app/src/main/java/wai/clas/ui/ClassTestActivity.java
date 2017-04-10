@@ -1,5 +1,6 @@
 package wai.clas.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -45,6 +46,7 @@ public class ClassTestActivity extends BaseActivity {
         if (("0").equals(user_type)) {
             uploadBtn.setVisibility(View.GONE);
         }
+        uploadBtn.setOnClickListener(view -> startActivityForResult(new Intent(ClassTestActivity.this, AddClassActivity.class), 0));
         toolbar.setLeftClick(() -> finish());
         classTests = new ArrayList<>();
         commonAdapter = new CommonAdapter<ClassTest>(this, classTests, R.layout.item_test) {
@@ -67,6 +69,13 @@ public class ClassTestActivity extends BaseActivity {
 
     @Override
     public void initEvents() {
+        load();
+        mainLv.setOnItemClickListener((adapterView, view, i, l) ->
+                Utils.IntentPost(TestDetailActivity.class, intent ->
+                        intent.putExtra("model", classTests.get(i))));
+    }
+
+    void load() {
         BmobQuery<ClassTest> query = new BmobQuery<>();
         query.findObjects(new FindListener<ClassTest>() {
             @Override
@@ -77,9 +86,16 @@ public class ClassTestActivity extends BaseActivity {
                 }
             }
         });
-        mainLv.setOnItemClickListener((adapterView, view, i, l) ->
-                Utils.IntentPost(TestDetailActivity.class, intent ->
-                        intent.putExtra("model", classTests.get(i))));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            case 99:
+                load();
+                break;
+        }
     }
 
     @Override
