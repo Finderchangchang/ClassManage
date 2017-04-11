@@ -44,6 +44,7 @@ public class AddClassActivity extends BaseActivity {
     ImageView class3Iv;
     @Bind(R.id.save_btn)
     Button saveBtn;
+    int now_size = 0;
 
     @Override
     public void initViews() {
@@ -76,24 +77,42 @@ public class AddClassActivity extends BaseActivity {
 //                });
             }
         });
-        class1Iv.setOnClickListener(view -> PhotoPicker.builder()
-                .setPhotoCount(3)
-                .setShowCamera(true)
-                .setShowGif(true)
-                .setPreviewEnabled(false)
-                .start(this, PhotoPicker.REQUEST_CODE));
-        class2Iv.setOnClickListener(view -> PhotoPicker.builder()
-                .setPhotoCount(2)
-                .setShowCamera(true)
-                .setShowGif(true)
-                .setPreviewEnabled(false)
-                .start(this, PhotoPicker.REQUEST_CODE));
-        class3Iv.setOnClickListener(view -> PhotoPicker.builder()
-                .setPhotoCount(1)
-                .setShowCamera(true)
-                .setShowGif(true)
-                .setPreviewEnabled(false)
-                .start(this, PhotoPicker.REQUEST_CODE));
+        class1Iv.setOnClickListener(view -> {
+            if (now_size >= 1) {//显示详情
+
+            } else {//选取图片
+                PhotoPicker.builder()
+                        .setPhotoCount(2)
+                        .setShowCamera(true)
+                        .setShowGif(true)
+                        .setPreviewEnabled(false)
+                        .start(this, PhotoPicker.REQUEST_CODE);
+            }
+        });
+        class2Iv.setOnClickListener(view -> {
+            if (now_size >= 2) {//显示详情
+
+            } else {//选取图片
+                PhotoPicker.builder()
+                        .setPhotoCount(1)
+                        .setShowCamera(true)
+                        .setShowGif(true)
+                        .setPreviewEnabled(false)
+                        .start(this, PhotoPicker.REQUEST_CODE);
+            }
+        });
+        class3Iv.setOnClickListener(view -> {
+            if (now_size >= 3) {//显示详情
+
+            } else {
+                PhotoPicker.builder()
+                        .setPhotoCount(3)
+                        .setShowCamera(true)
+                        .setShowGif(true)
+                        .setPreviewEnabled(false)
+                        .start(this, PhotoPicker.REQUEST_CODE);
+            }
+        });
     }
 
     @Override
@@ -103,42 +122,48 @@ public class AddClassActivity extends BaseActivity {
             if (data != null) {
                 ArrayList<String> photos =
                         data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
-                final String[] filePaths = new String[photos.size()];
-                for (int i = 0; i < photos.size(); i++) {
-                    filePaths[i] = photos.get(i);
-                }
-                BmobFile.uploadBatch(filePaths, new UploadBatchListener() {
-                    @Override
-                    public void onSuccess(List<BmobFile> files, List<String> urls) {
-                        if (urls.size() == filePaths.length) {//如果数量相等，则代表文件全部上传完成
-                            for (int i = 0; i < files.size(); i++) {
-                                if (i == 0) {
-                                    class1Iv.setImageBitmap(Utils.getBitmapByFile(photos.get(0)));
-                                } else if (i == 1) {
-                                    class2Iv.setImageBitmap(Utils.getBitmapByFile(photos.get(1)));
-                                } else if (i == 2) {
-                                    class3Iv.setImageBitmap(Utils.getBitmapByFile(photos.get(2)));
-                                }
-                            }
-                        }
-                    }
 
-                    @Override
-                    public void onError(int statuscode, String errormsg) {
-
-                    }
-
-                    @Override
-                    public void onProgress(int curIndex, int curPercent, int total, int totalPercent) {
-                        //1、curIndex--表示当前第几个文件正在上传
-                        //2、curPercent--表示当前上传文件的进度值（百分比）
-                        //3、total--表示总的上传文件数
-                        //4、totalPercent--表示总的上传进度（百分比）
-                    }
-                });
             }
         }
 
+    }
+
+    void load() {
+        List<String> photos = new ArrayList<>();
+        final String[] filePaths = new String[photos.size()];
+        for (int i = 0; i < photos.size(); i++) {
+            filePaths[i] = photos.get(i);
+        }
+        now_size = photos.size();
+        BmobFile.uploadBatch(filePaths, new UploadBatchListener() {
+            @Override
+            public void onSuccess(List<BmobFile> files, List<String> urls) {
+                if (urls.size() == filePaths.length) {//如果数量相等，则代表文件全部上传完成
+                    for (int i = 0; i < files.size(); i++) {
+                        if (i == 0) {
+                            class1Iv.setImageBitmap(Utils.getBitmapByFile(photos.get(0)));
+                        } else if (i == 1) {
+                            class2Iv.setImageBitmap(Utils.getBitmapByFile(photos.get(1)));
+                        } else if (i == 2) {
+                            class3Iv.setImageBitmap(Utils.getBitmapByFile(photos.get(2)));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onError(int statuscode, String errormsg) {
+
+            }
+
+            @Override
+            public void onProgress(int curIndex, int curPercent, int total, int totalPercent) {
+                //1、curIndex--表示当前第几个文件正在上传
+                //2、curPercent--表示当前上传文件的进度值（百分比）
+                //3、total--表示总的上传文件数
+                //4、totalPercent--表示总的上传进度（百分比）
+            }
+        });
     }
 
     @Override
