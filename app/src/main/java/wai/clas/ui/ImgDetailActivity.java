@@ -3,6 +3,8 @@ package wai.clas.ui;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 import net.tsz.afinal.view.TitleBar;
 
 import butterknife.Bind;
@@ -21,15 +23,23 @@ public class ImgDetailActivity extends BaseActivity {
     public void initViews() {
         url = getIntent().getStringExtra("url");
         toolbar.setLeftClick(() -> finish());
-        toolbar.setRightClick(() -> {
-            setResult(88);
-            finish();
-        });
+        if (url != null) {
+            toolbar.setRighttv("删除");
+            toolbar.setRightClick(() -> {
+                setResult(88);
+                finish();
+            });
+            totalIv.setImageBitmap(Utils.getBitmapByFile(url));
+        } else {
+            Glide.with(this)
+                    .load(getIntent().getStringExtra("url1"))
+                    .into(totalIv);
+        }
     }
 
     @Override
     public void initEvents() {
-        totalIv.setImageBitmap(Utils.getBitmapByFile(url));
+
     }
 
     @Override

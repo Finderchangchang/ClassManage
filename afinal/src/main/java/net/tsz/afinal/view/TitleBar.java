@@ -121,6 +121,10 @@ public class TitleBar extends LinearLayout {
         }
     }
 
+    public void setRighttv(String name) {
+        right_tv.setText(name);
+    }
+
     public void setCentertv(String name) {
         center_tv.setText(name);
     }

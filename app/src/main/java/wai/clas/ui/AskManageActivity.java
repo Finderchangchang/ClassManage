@@ -1,6 +1,7 @@
 package wai.clas.ui;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +36,8 @@ public class AskManageActivity extends BaseActivity {
     ListView main_lv;
     @Bind(R.id.add_question_btn)
     Button add_question_btn;
+    @Bind(R.id.main_srl)
+    SwipeRefreshLayout main_srl;
     List<AskManage> list;
     CommonAdapter<AskManage> commonAdapter;
     String type;
@@ -66,6 +69,9 @@ public class AskManageActivity extends BaseActivity {
                 holder.setText(R.id.time_tv, askManage.getCreatedAt());
             }
         };
+        main_srl.setOnRefreshListener(() -> {
+            refresh();
+        });
         main_lv.setAdapter(commonAdapter);
         refresh();
         main_lv.setOnItemClickListener((adapterView, view, i, l) ->
@@ -78,9 +84,11 @@ public class AskManageActivity extends BaseActivity {
     void refresh() {
         list = new ArrayList<>();
         BmobQuery<AskManage> query = new BmobQuery<>();
-        UserModel userModel = new UserModel();
-        userModel.setObjectId(Utils.getCache("user_id"));
-        query.addWhereEqualTo("student", userModel);
+        if (("0").equals(type)) {
+            UserModel userModel = new UserModel();
+            userModel.setObjectId(Utils.getCache("user_id"));
+            query.addWhereEqualTo("student", userModel);
+        }
         query.findObjects(new FindListener<AskManage>() {
             @Override
             public void done(List<AskManage> list1, BmobException e) {
@@ -88,6 +96,7 @@ public class AskManageActivity extends BaseActivity {
                     list = list1;
                     commonAdapter.refresh(list);
                 }
+                main_srl.setRefreshing(false);
             }
         });
     }

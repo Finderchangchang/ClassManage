@@ -35,6 +35,7 @@ public class AddAskActivity extends BaseActivity {
 
     @Override
     public void initEvents() {
+        toolbar.setLeftClick(() -> finish());
         saveBtn.setOnClickListener(v -> {
             String title = titleEt.getText().toString().trim();
             if (TextUtils.isEmpty(title)) {

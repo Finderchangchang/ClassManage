@@ -12,11 +12,18 @@
         android:background="@color/colorPrimary"
         app:center_tv="提问管理" />
 
-    <ListView
-        android:id="@+id/main_lv"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/main_srl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/main_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
     <Button
         android:id="@+id/add_question_btn"

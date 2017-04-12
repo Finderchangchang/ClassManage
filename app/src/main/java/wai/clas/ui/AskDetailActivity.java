@@ -1,6 +1,7 @@
 package wai.clas.ui;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,6 +48,9 @@ public class AskDetailActivity extends BaseActivity {
     EditText send_msg_et;
     @Bind(R.id.send_btn)
     Button send_btn;
+    @Bind(R.id.main_srl)
+    SwipeRefreshLayout main_srl;
+    AskManage manage;
 
     @Override
     public void initViews() {
@@ -74,20 +78,8 @@ public class AskDetailActivity extends BaseActivity {
             }
         };
         mainLv.setAdapter(commonAdapter);
-        BmobQuery<AskRecord> query = new BmobQuery<>();
-        AskManage manage = new AskManage();
-        manage.setObjectId(model.getObjectId());
-        query.addWhereEqualTo("askid", manage);
-        query.include("user");
-        query.findObjects(new FindListener<AskRecord>() {
-            @Override
-            public void done(List<AskRecord> list1, BmobException e) {
-                if (e == null) {
-                    records = list1;
-                    commonAdapter.refresh(records);
-                }
-            }
-        });
+
+        main_srl.setOnRefreshListener(() -> refresh());
         send_btn.setOnClickListener(v -> {
             AskRecord record = new AskRecord();
             UserModel model = new UserModel();
@@ -109,6 +101,25 @@ public class AskDetailActivity extends BaseActivity {
                     }
                 }
             });
+        });
+        refresh();
+    }
+
+    void refresh() {
+        BmobQuery<AskRecord> query = new BmobQuery<>();
+        manage = new AskManage();
+        manage.setObjectId(model.getObjectId());
+        query.addWhereEqualTo("askid", manage);
+        query.include("user");
+        query.findObjects(new FindListener<AskRecord>() {
+            @Override
+            public void done(List<AskRecord> list1, BmobException e) {
+                if (e == null) {
+                    records = list1;
+                    commonAdapter.refresh(records);
+                }
+                main_srl.setRefreshing(false);
+            }
         });
     }
 

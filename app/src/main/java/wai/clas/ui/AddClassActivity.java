@@ -60,23 +60,11 @@ public class AddClassActivity extends BaseActivity {
             if (TextUtils.isEmpty(title)) {
                 ToastShort("问题标题不能为空");
             } else {
-                UserModel user = new UserModel();
-                user.setObjectId(Utils.getCache("user_id"));
-//                model.setTitle(user);
-//                manage.setTitle(title);
-//                manage.setContent(contentEt.getText().toString().trim());
-//                manage.save(new SaveListener<String>() {
-//                    @Override
-//                    public void done(String s, BmobException e) {
-//                        if (e == null) {
-//                            ToastShort("添加成功");
-//                            setResult(99);
-//                            finish();
-//                        } else {
-//                            ToastShort("请检查网络连接");
-//                        }
-//                    }
-//                });
+                if (imgs.size() > 0) {
+                    load();
+                } else {
+                    save(new ArrayList<>());
+                }
             }
         });
         class1Iv.setOnClickListener(view -> {
@@ -87,7 +75,7 @@ public class AddClassActivity extends BaseActivity {
                 startActivityForResult(intent, 1);
             } else {//选取图片
                 PhotoPicker.builder()
-                        .setPhotoCount(2)
+                        .setPhotoCount(3 - imgs.size())
                         .setShowCamera(true)
                         .setShowGif(true)
                         .setPreviewEnabled(false)
@@ -102,7 +90,7 @@ public class AddClassActivity extends BaseActivity {
                 startActivityForResult(intent, 1);
             } else {//选取图片
                 PhotoPicker.builder()
-                        .setPhotoCount(1)
+                        .setPhotoCount(3 - imgs.size())
                         .setShowCamera(true)
                         .setShowGif(true)
                         .setPreviewEnabled(false)
@@ -117,7 +105,7 @@ public class AddClassActivity extends BaseActivity {
                 startActivityForResult(intent, 1);
             } else {
                 PhotoPicker.builder()
-                        .setPhotoCount(3)
+                        .setPhotoCount(3 - imgs.size())
                         .setShowCamera(true)
                         .setShowGif(true)
                         .setPreviewEnabled(false)
@@ -136,19 +124,16 @@ public class AddClassActivity extends BaseActivity {
                         data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
                 imgs.addAll(photos);
                 refreshImg();
-                ToastShort(imgs.size() + "");
             }
         }
         if (resultCode == 88) {
             if (imgs.size() >= click_position) {
                 imgs.remove(click_position - 1);
-                ToastShort(imgs.size() + "");
                 refreshImg();
             }
         }
     }
 
-    int now_size = 0;//当前图片
     int click_position = 0;
     List<String> imgs = new ArrayList<>();
 
@@ -172,8 +157,10 @@ public class AddClassActivity extends BaseActivity {
             class1Iv.setVisibility(View.VISIBLE);
             class2Iv.setVisibility(View.VISIBLE);
             class3Iv.setVisibility(View.INVISIBLE);
-        } else if (imgs.size() == 2) {
-            class3Iv.setImageResource(R.mipmap.add_img);
+        } else if (imgs.size() >= 2) {
+            if (imgs.size() == 2) {
+                class3Iv.setImageResource(R.mipmap.add_img);
+            }
             class1Iv.setVisibility(View.VISIBLE);
             class2Iv.setVisibility(View.VISIBLE);
             class3Iv.setVisibility(View.VISIBLE);
@@ -181,31 +168,21 @@ public class AddClassActivity extends BaseActivity {
     }
 
     void load() {
-        List<String> photos = new ArrayList<>();
-        final String[] filePaths = new String[photos.size()];
-        for (int i = 0; i < photos.size(); i++) {
-            filePaths[i] = photos.get(i);
+        final String[] filePaths = new String[imgs.size()];
+        for (int i = 0; i < imgs.size(); i++) {
+            filePaths[i] = imgs.get(i);
         }
-        now_size = photos.size();
         BmobFile.uploadBatch(filePaths, new UploadBatchListener() {
             @Override
             public void onSuccess(List<BmobFile> files, List<String> urls) {
                 if (urls.size() == filePaths.length) {//如果数量相等，则代表文件全部上传完成
-                    for (int i = 0; i < files.size(); i++) {
-                        if (i == 0) {
-                            class1Iv.setImageBitmap(Utils.getBitmapByFile(photos.get(0)));
-                        } else if (i == 1) {
-                            class2Iv.setImageBitmap(Utils.getBitmapByFile(photos.get(1)));
-                        } else if (i == 2) {
-                            class3Iv.setImageBitmap(Utils.getBitmapByFile(photos.get(2)));
-                        }
-                    }
+                    save(urls);
                 }
             }
 
             @Override
             public void onError(int statuscode, String errormsg) {
-
+                ToastShort("上传失败，请重试");
             }
 
             @Override
@@ -214,6 +191,38 @@ public class AddClassActivity extends BaseActivity {
                 //2、curPercent--表示当前上传文件的进度值（百分比）
                 //3、total--表示总的上传文件数
                 //4、totalPercent--表示总的上传进度（百分比）
+            }
+        });
+    }
+
+    void save(List<String> urls) {
+        UserModel user = new UserModel();
+        user.setObjectId(Utils.getCache("user_id"));
+        model.setTeacher(user);
+        model.setTitle(titleEt.getText().toString().trim());
+        model.setContent(contentEt.getText().toString().trim());
+        if (urls.size() != 0) {
+            if (urls.size() > 2) {
+                model.setImg3(urls.get(2));
+                model.setImg2(urls.get(1));
+                model.setImg1(urls.get(0));
+            } else if (urls.size() > 1) {
+                model.setImg2(urls.get(1));
+                model.setImg1(urls.get(0));
+            } else {
+                model.setImg1(urls.get(0));
+            }
+        }
+        model.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                if (e == null) {
+                    ToastShort("添加成功");
+                    setResult(99);
+                    finish();
+                } else {
+                    ToastShort("请检查网络连接");
+                }
             }
         });
     }

@@ -51,12 +51,14 @@
             <ImageView
                 android:id="@+id/test2_iv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
 
             <ImageView
                 android:id="@+id/test3_iv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

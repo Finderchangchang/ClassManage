@@ -22,5 +22,8 @@
         android:id="@+id/upload_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="上传题目" />
+        android:background="@drawable/login_btn_bg"
+        android:text="上传题目"
+        android:textColor="#fff"
+        android:textSize="18sp" />
 </LinearLayout>

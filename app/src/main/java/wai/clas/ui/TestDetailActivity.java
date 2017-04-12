@@ -11,6 +11,7 @@ import net.tsz.afinal.view.TitleBar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import wai.clas.base.BaseActivity;
+import wai.clas.method.Utils;
 import wai.clas.model.ClassTest;
 
 /**
@@ -53,6 +54,9 @@ public class TestDetailActivity extends BaseActivity {
         Glide.with(this)
                 .load(model.getImg3())
                 .into(test3Iv);
+        test1Iv.setOnClickListener(view -> Utils.IntentPost(ImgDetailActivity.class, intent -> intent.putExtra("url1", model.getImg1())));
+        test2Iv.setOnClickListener(view -> Utils.IntentPost(ImgDetailActivity.class, intent -> intent.putExtra("url1", model.getImg2())));
+        test3Iv.setOnClickListener(view -> Utils.IntentPost(ImgDetailActivity.class, intent -> intent.putExtra("url1", model.getImg3())));
     }
 
     @Override

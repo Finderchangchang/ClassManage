@@ -16,6 +16,15 @@ public class ClassTest extends BmobObject implements Serializable {
     String img1;
     String img2;
     String img3;
+    UserModel teacher;
+
+    public UserModel getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(UserModel teacher) {
+        this.teacher = teacher;
+    }
 
     public String getTitle() {
         return title;
