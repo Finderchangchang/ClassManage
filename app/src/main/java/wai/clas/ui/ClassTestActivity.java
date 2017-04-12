@@ -12,6 +12,7 @@ import android.widget.ViewFlipper;
 
 import net.tsz.afinal.view.TitleBar;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class ClassTestActivity extends BaseActivity {
                     if (content.length() > 40) {
                         holder.setText(R.id.content_tv, content + "...");
                     } else {
-                        holder.setText(R.id.content_tv, content);
+                        holder.setText(R.id.content_tv, content);//15233710192
                     }
                 }
                 holder.setText(R.id.time_tv, classTest.getCreatedAt());
@@ -87,6 +88,7 @@ public class ClassTestActivity extends BaseActivity {
             }
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

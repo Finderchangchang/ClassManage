@@ -35,10 +35,10 @@
             android:name="me.iwf.photopicker.PhotoPickerActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/customTheme" />
-
         <activity
             android:name="me.iwf.photopicker.PhotoPagerActivity"
             android:theme="@style/customTheme" />
+        <activity android:name=".ImgDetailActivity"></activity>
     </application>
 
 </manifest>

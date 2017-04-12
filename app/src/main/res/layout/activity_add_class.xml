@@ -74,20 +74,20 @@
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_marginRight="40dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/add_img" />
 
         <ImageView
             android:id="@+id/class2_iv"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_marginRight="40dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/add_img" />
 
         <ImageView
             android:id="@+id/class3_iv"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/add_img" />
     </LinearLayout>
 
     <Button

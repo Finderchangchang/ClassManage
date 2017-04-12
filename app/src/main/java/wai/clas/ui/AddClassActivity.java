@@ -3,6 +3,7 @@ package wai.clas.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 
 import net.tsz.afinal.view.TitleBar;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +46,7 @@ public class AddClassActivity extends BaseActivity {
     ImageView class3Iv;
     @Bind(R.id.save_btn)
     Button saveBtn;
-    int now_size = 0;
+
 
     @Override
     public void initViews() {
@@ -78,8 +80,11 @@ public class AddClassActivity extends BaseActivity {
             }
         });
         class1Iv.setOnClickListener(view -> {
-            if (now_size >= 1) {//显示详情
-
+            click_position = 1;
+            if (imgs.size() >= 1) {//显示详情
+                Intent intent = new Intent(AddClassActivity.this, ImgDetailActivity.class);
+                intent.putExtra("url", imgs.get(0));
+                startActivityForResult(intent, 1);
             } else {//选取图片
                 PhotoPicker.builder()
                         .setPhotoCount(2)
@@ -90,8 +95,11 @@ public class AddClassActivity extends BaseActivity {
             }
         });
         class2Iv.setOnClickListener(view -> {
-            if (now_size >= 2) {//显示详情
-
+            click_position = 2;
+            if (imgs.size() >= 2) {//显示详情
+                Intent intent = new Intent(AddClassActivity.this, ImgDetailActivity.class);
+                intent.putExtra("url", imgs.get(1));
+                startActivityForResult(intent, 1);
             } else {//选取图片
                 PhotoPicker.builder()
                         .setPhotoCount(1)
@@ -102,8 +110,11 @@ public class AddClassActivity extends BaseActivity {
             }
         });
         class3Iv.setOnClickListener(view -> {
-            if (now_size >= 3) {//显示详情
-
+            click_position = 3;
+            if (imgs.size() >= 3) {//显示详情
+                Intent intent = new Intent(AddClassActivity.this, ImgDetailActivity.class);
+                intent.putExtra("url", imgs.get(2));
+                startActivityForResult(intent, 1);
             } else {
                 PhotoPicker.builder()
                         .setPhotoCount(3)
@@ -113,6 +124,7 @@ public class AddClassActivity extends BaseActivity {
                         .start(this, PhotoPicker.REQUEST_CODE);
             }
         });
+        refreshImg();
     }
 
     @Override
@@ -122,10 +134,50 @@ public class AddClassActivity extends BaseActivity {
             if (data != null) {
                 ArrayList<String> photos =
                         data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
-
+                imgs.addAll(photos);
+                refreshImg();
+                ToastShort(imgs.size() + "");
             }
         }
+        if (resultCode == 88) {
+            if (imgs.size() >= click_position) {
+                imgs.remove(click_position - 1);
+                ToastShort(imgs.size() + "");
+                refreshImg();
+            }
+        }
+    }
 
+    int now_size = 0;//当前图片
+    int click_position = 0;
+    List<String> imgs = new ArrayList<>();
+
+    void refreshImg() {
+        for (int i = 0; i < imgs.size(); i++) {
+            if (i == 0) {
+                class1Iv.setImageBitmap(Utils.getBitmapByFile(imgs.get(0)));
+            } else if (i == 1) {
+                class2Iv.setImageBitmap(Utils.getBitmapByFile(imgs.get(1)));
+            } else if (i == 2) {
+                class3Iv.setImageBitmap(Utils.getBitmapByFile(imgs.get(2)));
+            }
+        }
+        if (imgs.size() == 0) {
+            class1Iv.setImageResource(R.mipmap.add_img);
+            class1Iv.setVisibility(View.VISIBLE);
+            class2Iv.setVisibility(View.INVISIBLE);
+            class3Iv.setVisibility(View.INVISIBLE);
+        } else if (imgs.size() == 1) {
+            class2Iv.setImageResource(R.mipmap.add_img);
+            class1Iv.setVisibility(View.VISIBLE);
+            class2Iv.setVisibility(View.VISIBLE);
+            class3Iv.setVisibility(View.INVISIBLE);
+        } else if (imgs.size() == 2) {
+            class3Iv.setImageResource(R.mipmap.add_img);
+            class1Iv.setVisibility(View.VISIBLE);
+            class2Iv.setVisibility(View.VISIBLE);
+            class3Iv.setVisibility(View.VISIBLE);
+        }
     }
 
     void load() {

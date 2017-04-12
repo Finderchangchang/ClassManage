@@ -71,9 +71,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="添加"
             android:textSize="16sp"
-            android:visibility="gone" />
+            android:textColor="#fff333"/>
     </RelativeLayout>
 
 

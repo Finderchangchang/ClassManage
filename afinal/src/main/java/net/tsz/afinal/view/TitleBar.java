@@ -64,7 +64,6 @@ public class TitleBar extends LinearLayout {
         right_tv = (TextView) findViewById(R.id.right_tv);
         right_rl = (RelativeLayout) findViewById(R.id.right_rl);
         if (!TextUtils.isEmpty(str_right_tv)) {
-            right_tv.setVisibility(VISIBLE);
             right_tv.setText(str_right_tv);
         }
         right_rl.setOnClickListener(new OnClickListener() {
