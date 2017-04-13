@@ -9,6 +9,7 @@
     android:paddingTop="5dp">
 
     <LinearLayout
+        android:id="@+id/top_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"

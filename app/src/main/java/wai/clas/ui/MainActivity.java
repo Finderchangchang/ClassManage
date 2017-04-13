@@ -39,7 +39,8 @@ public class MainActivity extends BaseActivity {
             mainTv3.setText("提问管理");
             mainTv4.setText("个人中心");
         }
-        mainTv1.setOnClickListener(v -> new LoadingDialog(this).show());//签到管理
+        //new LoadingDialog(this).show()
+        mainTv1.setOnClickListener(v -> Utils.IntentPost(SignInActivity.class));//签到管理
         mainTv2.setOnClickListener(view -> Utils.IntentPost(ClassTestActivity.class));//课程管理
         mainTv3.setOnClickListener(view -> Utils.IntentPost(AskManageActivity.class));//提问管理
         mainTv4.setOnClickListener(v -> Utils.IntentPost(UserCenterActivity.class));//个人中心

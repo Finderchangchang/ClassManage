@@ -8,7 +8,7 @@ import cn.bmob.v3.BmobUser;
  */
 
 public class UserModel extends BmobUser {
-    String usertype;
+    String usertype;//0，用户。1,教师
 
     public String getUsertype() {
         return usertype;
