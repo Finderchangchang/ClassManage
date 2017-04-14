@@ -8,6 +8,15 @@ import cn.bmob.v3.BmobObject;
 
 public class OpenClassRecord extends BmobObject {
     UserModel student;
+    OpenClass oclass;
+
+    public OpenClass getOclass() {
+        return oclass;
+    }
+
+    public void setOclass(OpenClass oclass) {
+        this.oclass = oclass;
+    }
 
     public UserModel getStudent() {
         return student;
