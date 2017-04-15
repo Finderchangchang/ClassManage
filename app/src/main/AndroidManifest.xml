@@ -62,7 +62,8 @@
             android:name="com.amap.api.v2.apikey"
             android:value="7f6911f9d7baa57fe2f09fc2e130521d" />
 
-        <activity android:name=".SignInActivity"></activity>
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".ClassRecordActivity"></activity>
     </application>
 
 </manifest>

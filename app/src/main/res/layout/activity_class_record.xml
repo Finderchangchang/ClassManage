@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        app:center_tv="签到记录" />
+        app:center_tv="打卡记录" />
 
     <ListView
         android:id="@+id/main_lv"
