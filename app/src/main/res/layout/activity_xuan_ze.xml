@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <net.tsz.afinal.view.TitleBar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        app:center_tv="打卡记录" />
-
-    <TextView
-        android:id="@+id/sign_num_tv"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="#999"
-        android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:text="签到人数：10人"
-        android:textColor="@android:color/white" />
+        app:center_tv="选择题" />
 
     <ListView
         android:id="@+id/main_lv"

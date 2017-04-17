@@ -12,10 +12,14 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
+import java.security.acl.Group;
 
 /**
  * Created by liuliu on 2015/11/16   16:29
@@ -102,6 +106,13 @@ public class CommonViewHolder {
 
     public CommonViewHolder setText(int viewId, Object text) {
         TextView view = getView(viewId);
+        if (text != null)
+            view.setText(text + "");
+        return this;
+    }
+
+    public CommonViewHolder setGBText(int viewId, Object text) {
+        RadioButton view = getView(viewId);
         if (text != null)
             view.setText(text + "");
         return this;

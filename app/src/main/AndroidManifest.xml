@@ -31,9 +31,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -63,7 +61,8 @@
             android:value="7f6911f9d7baa57fe2f09fc2e130521d" />
 
         <activity android:name=".SignInActivity" />
-        <activity android:name=".ClassRecordActivity"></activity>
+        <activity android:name=".ClassRecordActivity" />
+        <activity android:name=".XuanZeActivity"></activity>
     </application>
 
 </manifest>

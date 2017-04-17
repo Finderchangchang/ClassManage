@@ -20,21 +20,44 @@
         android:background="@color/colorPrimary"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingTop="30dp">
+        android:paddingTop="10dp">
 
         <ImageView
             android:id="@+id/user_iv"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="20dp" />
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/tx" />
+
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="柳伟杰"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
     </LinearLayout>
+
+    <net.tsz.afinal.view.MenuView
+        android:id="@+id/qd_mv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu_left_iv="@mipmap/main1"
+        app:menu_left_tv="签到记录" />
+
+    <net.tsz.afinal.view.MenuView
+        android:id="@+id/tw_mv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu_left_iv="@mipmap/main2"
+        app:menu_left_tv="提问管理" />
 
     <net.tsz.afinal.view.MenuView
         android:id="@+id/exit_mv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu_left_iv="@mipmap/ic_launcher"
-        app:menu_left_tv="退出登录"
-        app:menu_right_tv="双击666" />
+        app:menu_left_iv="@mipmap/main4"
+        app:menu_left_tv="退出登录" />
 </LinearLayout>

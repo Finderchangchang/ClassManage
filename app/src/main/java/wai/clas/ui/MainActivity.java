@@ -65,6 +65,7 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.no_class_tv)
     TextView no_class_tv;
     List<OpenClassRecord> records;
+    public static MainActivity main;
 
     @Override
     public void initViews() {
@@ -73,13 +74,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initEvents() {
+        main = this;
         if (("0").equals(user_type)) {//用户
             mainTv1.setText("签到");
             mainTv2.setText("课堂测验");
-            mainTv3.setText("提问管理");
+            mainTv3.setText("课堂互动");
             mainTv4.setText("个人中心");
         }
-        //new LoadingDialog(this).show()
         mainTv1.setOnClickListener(v -> Utils.IntentPost(SignInActivity.class));//签到管理
         mainTv2.setOnClickListener(view -> Utils.IntentPost(ClassTestActivity.class));//课程管理
         mainTv3.setOnClickListener(view -> Utils.IntentPost(AskManageActivity.class));//提问管理

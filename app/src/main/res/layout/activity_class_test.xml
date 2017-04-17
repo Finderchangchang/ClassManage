@@ -12,6 +12,15 @@
         android:background="@color/colorPrimary"
         app:center_tv="课堂测验" />
 
+    <TextView
+        android:id="@+id/choice_tv"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="选择题"
+        android:textSize="18sp" />
+
     <ListView
         android:id="@+id/main_lv"
         android:layout_width="match_parent"
@@ -22,7 +31,7 @@
         android:id="@+id/upload_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/login_btn_bg"
+        android:background="@color/colorPrimary"
         android:text="上传题目"
         android:textColor="#fff"
         android:textSize="18sp" />

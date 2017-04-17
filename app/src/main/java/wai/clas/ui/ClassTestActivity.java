@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import net.tsz.afinal.view.TitleBar;
@@ -40,6 +41,8 @@ public class ClassTestActivity extends BaseActivity {
     @Bind(R.id.upload_btn)
     Button uploadBtn;
     String user_type;
+    @Bind(R.id.choice_tv)
+    TextView choice_tv;
 
     @Override
     public void initViews() {
@@ -47,6 +50,7 @@ public class ClassTestActivity extends BaseActivity {
         if (("0").equals(user_type)) {
             uploadBtn.setVisibility(View.GONE);
         }
+        choice_tv.setOnClickListener(view -> Utils.IntentPost(XuanZeActivity.class));
         uploadBtn.setOnClickListener(view -> startActivityForResult(new Intent(ClassTestActivity.this, AddClassActivity.class), 0));
         toolbar.setLeftClick(() -> finish());
         classTests = new ArrayList<>();

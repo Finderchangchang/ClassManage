@@ -1,18 +1,16 @@
 package wai.clas.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import net.tsz.afinal.view.MenuView;
 import net.tsz.afinal.view.TitleBar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Response;
 import wai.clas.base.BaseActivity;
 import wai.clas.method.Utils;
 import wai.clas.model.UserModel;
@@ -25,6 +23,12 @@ public class UserCenterActivity extends BaseActivity {
     ImageView userIv;
     @Bind(R.id.user_center_ll)
     LinearLayout userCenterLl;
+    @Bind(R.id.name_tv)
+    TextView nameTv;
+    @Bind(R.id.qd_mv)
+    MenuView qdMv;
+    @Bind(R.id.tw_mv)
+    MenuView twMv;
     @Bind(R.id.exit_mv)
     MenuView exitMv;
 
@@ -35,6 +39,7 @@ public class UserCenterActivity extends BaseActivity {
 
     @Override
     public void initEvents() {
+        nameTv.setText(UserModel.getCurrentUser().getUsername());
         exitMv.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(UserCenterActivity.this);
             builder.setTitle("提示");
@@ -42,12 +47,16 @@ public class UserCenterActivity extends BaseActivity {
             builder.setNegativeButton("确定", (dialog, which) -> {
                 UserModel.logOut();
                 Utils.putCache("user_name", "");
+                MainActivity.main.finish();
+                finish();
             });
             builder.setPositiveButton("取消", (dialog2, which) -> {
 
             });
             builder.show();
         });
+        twMv.setOnClickListener(view -> Utils.IntentPost(AskManageActivity.class));
+        qdMv.setOnClickListener(view -> Utils.IntentPost(SignInActivity.class));
     }
 
     @Override
