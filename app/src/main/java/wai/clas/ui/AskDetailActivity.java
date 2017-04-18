@@ -67,7 +67,7 @@ public class AskDetailActivity extends BaseActivity {
         commonAdapter = new CommonAdapter<AskRecord>(this, records, R.layout.item_record) {
             @Override
             public void convert(CommonViewHolder holder, AskRecord askRecord, int position) {
-                holder.setText(R.id.title_tv, askRecord.getUser().getUsername());
+                holder.setText(R.id.title_tv, askRecord.getUser().getNickname());
                 holder.setText(R.id.content_tv, askRecord.getAnswer());
                 holder.setText(R.id.time_tv, askRecord.getCreatedAt());
                 if (("0").equals(askRecord.getUser().getUsertype())) {
@@ -111,6 +111,7 @@ public class AskDetailActivity extends BaseActivity {
         manage.setObjectId(model.getObjectId());
         query.addWhereEqualTo("askid", manage);
         query.include("user");
+        query.order("-createdAt");
         query.findObjects(new FindListener<AskRecord>() {
             @Override
             public void done(List<AskRecord> list1, BmobException e) {

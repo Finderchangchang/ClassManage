@@ -129,6 +129,7 @@ public class LoginActivity extends BaseActivity {
                                         map.put("user_id", userModel.getObjectId());
                                         map.put("user_name", userModel.getUsername());
                                         map.put("user_type", userModel.getUsertype());
+                                        map.put("name", userModel.getNickname());
                                         Utils.putCache(map);
                                         break;
                                 }
@@ -141,6 +142,7 @@ public class LoginActivity extends BaseActivity {
                                         map.put("user_id", userModel.getObjectId());
                                         map.put("user_name", userModel.getUsername());
                                         map.put("user_type", userModel.getUsertype());
+                                        map.put("name", userModel.getNickname());
                                         Utils.putCache(map);
                                         Utils.IntentPost(MainActivity.class);
                                         break;

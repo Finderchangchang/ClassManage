@@ -39,7 +39,7 @@ public class UserCenterActivity extends BaseActivity {
 
     @Override
     public void initEvents() {
-        nameTv.setText(UserModel.getCurrentUser().getUsername());
+        nameTv.setText(Utils.getCache("name"));
         exitMv.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(UserCenterActivity.this);
             builder.setTitle("提示");

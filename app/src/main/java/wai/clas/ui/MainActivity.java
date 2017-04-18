@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity {
         commonAdapter = new CommonAdapter<OpenClassRecord>(this, records, R.layout.item_record) {
             @Override
             public void convert(CommonViewHolder holder, OpenClassRecord openClass, int position) {
-                holder.setText(R.id.content_tv, (position + 1) + "   " + openClass.getStudent().getUsername());
+                holder.setText(R.id.content_tv, (position + 1) + "   " + openClass.getStudent().getNickname());
                 holder.setVisible(R.id.top_ll, false);
                 holder.setText(R.id.time_tv, openClass.getCreatedAt().substring(5, 16));
             }
@@ -236,7 +236,7 @@ public class MainActivity extends BaseActivity {
                             });
                             stateIv.setVisibility(View.VISIBLE);
                             no_class_tv.setText("");
-                            teacherNameTv.setText("当前上课老师为：" + openClass.getTeacher().getUsername());
+                            teacherNameTv.setText("当前上课老师为：" + openClass.getTeacher().getNickname());
                         } else {
                             stateIv.setVisibility(View.GONE);
                             no_class_tv.setText("当前无课，无需签到");

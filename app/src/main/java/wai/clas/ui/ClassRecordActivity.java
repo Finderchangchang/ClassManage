@@ -39,7 +39,7 @@ public class ClassRecordActivity extends BaseActivity {
         adapter = new CommonAdapter<OpenClassRecord>(this, list, R.layout.item_ask) {
             @Override
             public void convert(CommonViewHolder holder, OpenClassRecord openClassRecord, int position) {
-                holder.setText(R.id.title_tv, openClassRecord.getStudent().getUsername());
+                holder.setText(R.id.title_tv, openClassRecord.getStudent().getNickname());
                 holder.setText(R.id.time_tv, openClassRecord.getCreatedAt().substring(5, 16));
             }
         };

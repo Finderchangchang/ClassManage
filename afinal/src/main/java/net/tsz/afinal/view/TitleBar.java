@@ -52,7 +52,7 @@ public class TitleBar extends LinearLayout {
         init(context);
     }
 
-    private void init(Context context) {
+    void init(Context context) {
         LayoutInflater.from(context).inflate(R.layout.v_title_bar, this);
         left_iv = (ImageView) findViewById(R.id.left_iv);
         left_rl = (RelativeLayout) findViewById(R.id.left_rl);

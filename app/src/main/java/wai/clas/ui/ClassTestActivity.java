@@ -82,6 +82,7 @@ public class ClassTestActivity extends BaseActivity {
 
     void load() {
         BmobQuery<ClassTest> query = new BmobQuery<>();
+        query.order("-createdAt");
         query.findObjects(new FindListener<ClassTest>() {
             @Override
             public void done(List<ClassTest> list, BmobException e) {

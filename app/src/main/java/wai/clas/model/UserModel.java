@@ -9,6 +9,15 @@ import cn.bmob.v3.BmobUser;
 
 public class UserModel extends BmobUser {
     String usertype;//0，用户。1,教师
+    String nickname;//昵称
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
     public String getUsertype() {
         return usertype;

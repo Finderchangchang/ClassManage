@@ -42,7 +42,7 @@ public class SignInActivity extends BaseActivity {
         commonAdapter = new CommonAdapter<OpenClassRecord>(this, records, R.layout.item_record) {
             @Override
             public void convert(CommonViewHolder holder, OpenClassRecord openClass, int position) {
-                holder.setText(R.id.content_tv, (position + 1) + "   " + openClass.getStudent().getUsername());
+                holder.setText(R.id.content_tv, (position + 1) + "   " + openClass.getStudent().getNickname());
                 holder.setVisible(R.id.top_ll, false);
                 holder.setText(R.id.time_tv, openClass.getCreatedAt().substring(5, 16));
             }
@@ -50,7 +50,7 @@ public class SignInActivity extends BaseActivity {
         openClassCommonAdapter = new CommonAdapter<OpenClass>(this, list, R.layout.item_record) {
             @Override
             public void convert(CommonViewHolder holder, OpenClass openClass, int position) {
-                holder.setText(R.id.content_tv, openClass.getTeacher().getUsername());
+                holder.setText(R.id.content_tv, (position + 1) + "");
                 holder.setVisible(R.id.top_ll, false);
                 holder.setText(R.id.time_tv, openClass.getCreatedAt().substring(5, 16));
             }
@@ -61,6 +61,7 @@ public class SignInActivity extends BaseActivity {
             mainLv.setAdapter(openClassCommonAdapter);
             BmobQuery<OpenClass> query = new BmobQuery<>();
             query.include("teacher");
+            query.order("-createdAt");
             query.findObjects(new FindListener<OpenClass>() {
                 @Override
                 public void done(List<OpenClass> li, BmobException e) {
@@ -78,6 +79,7 @@ public class SignInActivity extends BaseActivity {
             BmobQuery<OpenClassRecord> recordBmobQuery = new BmobQuery<>();
             recordBmobQuery.include("student");
             recordBmobQuery.addWhereEqualTo("student", model);
+            recordBmobQuery.order("-createdAt");
             recordBmobQuery.findObjects(new FindListener<OpenClassRecord>() {
                 @Override
                 public void done(List<OpenClassRecord> list, BmobException e) {
