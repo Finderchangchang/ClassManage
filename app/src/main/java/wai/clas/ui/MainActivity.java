@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -65,6 +66,8 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.no_class_tv)
     TextView no_class_tv;
     List<OpenClassRecord> records;
+    @Bind(R.id.main_srl)
+    SwipeRefreshLayout main_srl;
     public static MainActivity main;
 
     @Override
@@ -95,7 +98,6 @@ public class MainActivity extends BaseActivity {
                 holder.setText(R.id.time_tv, openClass.getCreatedAt().substring(5, 16));
             }
         };
-
         mainLv.setAdapter(commonAdapter);
         mLocationOption = new AMapLocationClientOption();
         mLocationClient = new AMapLocationClient(getApplicationContext());
@@ -181,6 +183,10 @@ public class MainActivity extends BaseActivity {
                     ToastShort("您已经上课，不必再签到了~");
                 }
             }
+        });
+        main_srl.setOnRefreshListener(() -> {
+            refresh();
+            main_srl.setRefreshing(false);
         });
         refresh();
     }

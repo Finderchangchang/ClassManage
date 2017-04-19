@@ -54,6 +54,9 @@ public class AskManageActivity extends BaseActivity {
         if (("1").equals(type)) {
             add_question_btn.setVisibility(View.GONE);
         }
+        if (("1").equals(getIntent().getStringExtra("kk"))) {
+            add_question_btn.setVisibility(View.GONE);
+        }
         commonAdapter = new CommonAdapter<AskManage>(this, list, R.layout.item_ask) {
             @Override
             public void convert(CommonViewHolder holder, AskManage askManage, int position) {

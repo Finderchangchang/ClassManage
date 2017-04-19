@@ -93,8 +93,7 @@ public class AskDetailActivity extends BaseActivity {
                 @Override
                 public void done(String s, BmobException e) {
                     if (e == null) {
-                        records.add(record);
-                        commonAdapter.refresh(records);
+                        refresh();
                         send_msg_et.setText("");
                     } else {
                         ToastShort("发送失败，请检查网络连接");
@@ -106,6 +105,7 @@ public class AskDetailActivity extends BaseActivity {
     }
 
     void refresh() {
+        records = new ArrayList<>();
         BmobQuery<AskRecord> query = new BmobQuery<>();
         manage = new AskManage();
         manage.setObjectId(model.getObjectId());

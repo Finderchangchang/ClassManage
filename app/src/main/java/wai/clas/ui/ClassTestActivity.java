@@ -2,6 +2,7 @@ package wai.clas.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -43,11 +44,16 @@ public class ClassTestActivity extends BaseActivity {
     String user_type;
     @Bind(R.id.choice_tv)
     TextView choice_tv;
+    @Bind(R.id.main_srl)
+    SwipeRefreshLayout main_srl;
 
     @Override
     public void initViews() {
         user_type = Utils.getCache("user_type");
         if (("0").equals(user_type)) {
+            uploadBtn.setVisibility(View.GONE);
+        }
+        if (("1").equals(getIntent().getStringExtra("kk"))) {
             uploadBtn.setVisibility(View.GONE);
         }
         choice_tv.setOnClickListener(view -> Utils.IntentPost(XuanZeActivity.class));
@@ -70,6 +76,10 @@ public class ClassTestActivity extends BaseActivity {
             }
         };
         mainLv.setAdapter(commonAdapter);
+        main_srl.setOnRefreshListener(() -> {
+            main_srl.setRefreshing(false);
+            load();
+        });
     }
 
     @Override

@@ -48,6 +48,13 @@
         app:menu_left_tv="签到记录" />
 
     <net.tsz.afinal.view.MenuView
+        android:id="@+id/jc_mv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu_left_iv="@mipmap/main2"
+        app:menu_left_tv="课堂检测" />
+
+    <net.tsz.afinal.view.MenuView
         android:id="@+id/tw_mv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

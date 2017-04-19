@@ -31,6 +31,8 @@ public class UserCenterActivity extends BaseActivity {
     MenuView twMv;
     @Bind(R.id.exit_mv)
     MenuView exitMv;
+    @Bind(R.id.jc_mv)
+    MenuView jc_mv;
 
     @Override
     public void initViews() {
@@ -55,7 +57,8 @@ public class UserCenterActivity extends BaseActivity {
             });
             builder.show();
         });
-        twMv.setOnClickListener(view -> Utils.IntentPost(AskManageActivity.class));
+        jc_mv.setOnClickListener(view -> Utils.IntentPost(ClassTestActivity.class,intent -> intent.putExtra("kk","1")));
+        twMv.setOnClickListener(view -> Utils.IntentPost(AskManageActivity.class,intent -> intent.putExtra("kk","1")));
         qdMv.setOnClickListener(view -> Utils.IntentPost(SignInActivity.class));
     }
 
