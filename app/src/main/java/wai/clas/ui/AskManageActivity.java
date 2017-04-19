@@ -84,6 +84,7 @@ public class AskManageActivity extends BaseActivity {
     void refresh() {
         list = new ArrayList<>();
         BmobQuery<AskManage> query = new BmobQuery<>();
+        query.order("-createdAt");
         if (("0").equals(type)) {
             UserModel userModel = new UserModel();
             userModel.setObjectId(Utils.getCache("user_id"));
